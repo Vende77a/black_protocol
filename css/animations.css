@@ -1,4 +1,5 @@
 /* МИГАНИЕ ПОДЗАГОЛОВКА */
+/* Без изменений, работает отлично */
 .blink {
     animation: blinker 2s linear infinite;
 }
@@ -10,6 +11,8 @@
 /* ГЛИТЧ ЭФФЕКТ ДЛЯ ТЕКСТА */
 .glitch-text {
     position: relative;
+    /* Убеждаемся, что элементы не выходят за рамки при смещении */
+    display: inline-block;
 }
 
 /* Создаем две копии текста для смещения */
@@ -21,52 +24,60 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--bg-color); /* Чтобы перекрывать основной текст */
+    background: var(--bg-color); /* Перекрывает основной текст */
+    overflow: hidden;
 }
 
 .glitch-text::before {
-    left: 2px;
-    text-shadow: -1px 0 #00ffff;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
+    /* Сдвиг в em (относительно размера шрифта), а не в px */
+    left: 0.05em;
+    text-shadow: -0.05em 0 #00ffff;
+    /* Начальное состояние clip-path */
+    clip-path: inset(50% 0 30% 0);
+    animation: glitch-anim-responsive 5s infinite linear alternate-reverse;
 }
 
 .glitch-text::after {
-    left: -2px;
-    text-shadow: -1px 0 var(--primary-red);
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
+    left: -0.05em;
+    text-shadow: -0.05em 0 var(--primary-red);
+    clip-path: inset(10% 0 60% 0);
+    animation: glitch-anim-responsive 5s infinite linear alternate-reverse;
     animation-delay: 2s; /* Рассинхрон */
 }
 
-@keyframes glitch-anim {
-    0% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.5deg); }
-    5% { clip: rect(12px, 9999px, 59px, 0); transform: skew(0.5deg); }
-    10% { clip: rect(48px, 9999px, 29px, 0); transform: skew(0deg); }
-    15% { clip: rect(42px, 9999px, 73px, 0); transform: skew(0deg); }
-    20% { clip: rect(63px, 9999px, 27px, 0); transform: skew(0deg); }
-    25% { clip: rect(34px, 9999px, 55px, 0); transform: skew(0.5deg); }
-    30% { clip: rect(86px, 9999px, 73px, 0); transform: skew(0deg); }
-    35% { clip: rect(20px, 9999px, 20px, 0); transform: skew(0deg); }
-    40% { clip: rect(26px, 9999px, 60px, 0); transform: skew(0deg); }
-    45% { clip: rect(25px, 9999px, 66px, 0); transform: skew(0deg); }
-    50% { clip: rect(57px, 9999px, 98px, 0); transform: skew(0deg); }
-    55% { clip: rect(5px, 9999px, 46px, 0); transform: skew(0.5deg); }
-    60% { clip: rect(82px, 9999px, 31px, 0); transform: skew(0deg); }
-    65% { clip: rect(54px, 9999px, 27px, 0); transform: skew(0deg); }
-    70% { clip: rect(28px, 9999px, 99px, 0); transform: skew(0deg); }
-    75% { clip: rect(45px, 9999px, 69px, 0); transform: skew(0deg); }
-    80% { clip: rect(23px, 9999px, 85px, 0); transform: skew(0deg); }
-    85% { clip: rect(54px, 9999px, 84px, 0); transform: skew(0deg); }
-    90% { clip: rect(45px, 9999px, 47px, 0); transform: skew(0deg); }
-    95% { clip: rect(37px, 9999px, 20px, 0); transform: skew(0deg); }
-    100% { clip: rect(4px, 9999px, 91px, 0); transform: skew(0deg); }
+/* АДАПТИВНАЯ АНИМАЦИЯ ГЛИТЧА
+   Используем clip-path: inset(top right bottom left)
+   Значения в процентах (%) гарантируют, что глюк будет
+   на тексте любого размера.
+*/
+@keyframes glitch-anim-responsive {
+    0% { clip-path: inset(40% 0 61% 0); transform: skew(0.5deg); }
+    5% { clip-path: inset(9% 0 54% 0); transform: skew(0.5deg); }
+    10% { clip-path: inset(89% 0 3% 0); transform: skew(0deg); }
+    15% { clip-path: inset(12% 0 8% 0); transform: skew(0deg); }
+    20% { clip-path: inset(53% 0 45% 0); transform: skew(0deg); }
+    25% { clip-path: inset(23% 0 34% 0); transform: skew(0.5deg); }
+    30% { clip-path: inset(86% 0 7% 0); transform: skew(0deg); }
+    35% { clip-path: inset(5% 0 88% 0); transform: skew(0deg); }
+    40% { clip-path: inset(36% 0 11% 0); transform: skew(0deg); }
+    45% { clip-path: inset(25% 0 66% 0); transform: skew(0deg); }
+    50% { clip-path: inset(67% 0 12% 0); transform: skew(0deg); }
+    55% { clip-path: inset(4% 0 92% 0); transform: skew(0.5deg); }
+    60% { clip-path: inset(92% 0 2% 0); transform: skew(0deg); }
+    65% { clip-path: inset(44% 0 17% 0); transform: skew(0deg); }
+    70% { clip-path: inset(18% 0 39% 0); transform: skew(0deg); }
+    75% { clip-path: inset(75% 0 22% 0); transform: skew(0deg); }
+    80% { clip-path: inset(23% 0 65% 0); transform: skew(0deg); }
+    85% { clip-path: inset(84% 0 14% 0); transform: skew(0deg); }
+    90% { clip-path: inset(45% 0 47% 0); transform: skew(0deg); }
+    95% { clip-path: inset(37% 0 20% 0); transform: skew(0deg); }
+    100% { clip-path: inset(4% 0 91% 0); transform: skew(0deg); }
 }
 
 /* АНИМАЦИЯ ПЕРЕХОДА (Рассеивание) */
 .dissolve-out {
     animation: disperse 1.2s forwards ease-in;
-    pointer-events: none; /* Блокируем повторные клики */
+    pointer-events: none;
 }
 
 @keyframes disperse {
@@ -74,12 +85,14 @@
         opacity: 1;
         transform: scale(1);
         filter: blur(0px);
+        letter-spacing: normal;
     }
     100% {
         opacity: 0;
-        transform: scale(1.5); /* Увеличиваем, будто летим сквозь текст */
-        filter: blur(20px); /* Сильное размытие */
-        letter-spacing: 20px; /* Буквы разлетаются */
+        transform: scale(1.5);
+        filter: blur(10px); /* Чуть меньше блюра для мобильных (производительность) */
+        /* em позволяет разлету зависеть от размера букв, а не ширины экрана */
+        letter-spacing: 0.5em;
     }
 }
 
@@ -88,6 +101,7 @@
 }
 
 @keyframes appear {
-    0% { opacity: 0; transform: translateY(20px); }
+    /* rem - безопасная единица измерения для отступов */
+    0% { opacity: 0; transform: translateY(2rem); }
     100% { opacity: 1; transform: translateY(0); }
 }
