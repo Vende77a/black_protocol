@@ -45,18 +45,26 @@
 }
 
 @media (max-width: 768px) {
+    #game-board {
+        perspective: 1200px;
+    }
+
     .table {
-        width: 350vw;
-        --rotate-x: 65deg;
-        --translate-y: -10%;
-        bottom: -15vh;
+        width: 300vw;
+        --rotate-x: 62deg;
+        --translate-y: -15%;
+        bottom: -25svh;
+        height: 250svh;
     }
 }
 
 @media (max-width: 480px) {
     .table {
-        width: 450vw;
-        --rotate-x: 70deg;
+        width: 500vw;
+        --rotate-x: 65deg;
+        --translate-y: -10%;
+        bottom: -30svh;
+        height: 300svh;
     }
 }
 
