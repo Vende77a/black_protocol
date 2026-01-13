@@ -59,12 +59,18 @@
 }
 
 @media (max-width: 480px) {
+    #game-board {
+        /* Увеличиваем перспективу. Чем больше число, тем меньше искажаются бока (трапеция становится менее острой) */
+        perspective: 1500px;
+    }
+
     .table {
-        width: 500vw;
-        --rotate-x: 65deg;
-        --translate-y: -10%;
-        bottom: -30svh;
-        height: 300svh;
+        width: 600vw;
+        --rotate-x: 58deg;
+        --translate-y: -20%;
+        bottom: -35svh;
+        height: 250svh;
+        transform: translateX(-50%) rotateX(var(--rotate-x)) translateY(var(--translate-y)) scale(1.1);
     }
 }
 
