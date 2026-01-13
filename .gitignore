@@ -1,0 +1,14 @@
+# Временные файлы PhpStorm
+.idea/
+
+# Логи и кэш
+*.log
+.phpunit.result.cache
+
+# Файлы окружения с паролями от БД
+.env
+config.local.php
+
+# Системные файлы
+.DS_Store
+Thumbs.db
