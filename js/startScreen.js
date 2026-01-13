@@ -2,64 +2,68 @@ document.addEventListener('DOMContentLoaded', () => {
     const startScreen = document.getElementById('start-screen');
     const gameBoard = document.getElementById('game-board');
     const introAudio = document.getElementById('intro-audio');
+    const audioToggle = document.getElementById('audio-toggle');
+    const audioIcon = document.getElementById('audio-icon');
+
+    const iconOn = 'assets/ui/music_on.png';
+    const iconOff = 'assets/ui/music_off.png';
 
     introAudio.volume = 0.6;
+    introAudio.loop = true;
 
-    let audioEnabled = false;
     let gameStarted = false;
+    let isMuted = false;
 
-    /* ===== 1. КЛИК — ТОЛЬКО ЗАПУСК САУНДТРЕКА ===== */
-    function enableAudio() {
-        if (audioEnabled) return;
+    if (audioToggle) {
+        audioToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
 
-        audioEnabled = true;
-        introAudio.play().catch(() => {});
+            isMuted = !isMuted;
+            introAudio.muted = isMuted;
+
+            audioIcon.src = isMuted ? iconOff : iconOn;
+            console.log("Sound:", isMuted ? "OFF" : "ON");
+        });
     }
 
-    /* ===== 2. ПРОБЕЛ — СТАРТ ИГРЫ ===== */
-    function handleKeydown(event) {
-        if (event.code !== 'Space') return;
+    function launchGame() {
         if (gameStarted) return;
-
-        event.preventDefault();
         gameStarted = true;
 
-        // Глушим интро
-        fadeOutAudio(introAudio, 1000);
+        console.log("Start game");
 
-        // Анимация рассеивания
         startScreen.classList.add('dissolve-out');
 
         setTimeout(() => {
             startScreen.style.display = 'none';
 
-            gameBoard.classList.add('active');
-            gameBoard.classList.add('fade-in');
+            gameBoard.classList.remove('hidden');
+            gameBoard.classList.add('active', 'fade-in');
 
-            initGame();
+            if (typeof initGame === 'function') initGame();
         }, 1000);
     }
 
-    /* ===== СОБЫТИЯ ===== */
-    document.addEventListener('click', enableAudio);
-    document.addEventListener('keydown', handleKeydown);
-});
+    const handleInteraction = () => {
+        introAudio.play().catch(() => {});
 
-/* ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ===== */
+        const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 0);
 
-function fadeOutAudio(audio, duration) {
-    const step = audio.volume / (duration / 50);
-
-    const fade = setInterval(() => {
-        audio.volume = Math.max(0, audio.volume - step);
-
-        if (audio.volume <= 0) {
-            audio.pause();
-            clearInterval(fade);
+        if (isMobile && !gameStarted) {
+            launchGame();
         }
-    }, 50);
-}
+    };
 
-function initGame() {
-    console.log('BLACK PROTOCOL: match initialized');
-}
+    window.addEventListener('keydown', (event) => {
+        if (event.code === 'Space' || event.keyCode === 32) {
+            if (!gameStarted) {
+                event.preventDefault();
+                introAudio.play().catch(() => {});
+                launchGame();
+            }
+        }
+    });
+
+    window.addEventListener('click', handleInteraction);
+    window.addEventListener('touchstart', handleInteraction, { passive: true });
+});

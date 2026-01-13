@@ -13,7 +13,6 @@ body {
     font-family: var(--font-main);
     overflow: hidden;
     height: 100vh;
-    /* Исправляет баг высоты на мобильных браузерах с адресной строкой */
     height: 100dvh;
     display: flex;
     justify-content: center;
@@ -35,7 +34,6 @@ body {
     transition: opacity 1s ease;
 }
 
-/* --- ШУМ (Без изменений, он уже адаптивен) --- */
 .noise-overlay {
     position: absolute;
     top: 0;
@@ -63,8 +61,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%; /* Гарантируем, что контейнер не шире экрана */
-    padding: 0 20px; /* Защитные отступы по бокам */
+    width: 100%;
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
@@ -73,37 +71,33 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Убрали жесткий padding 60px, заменили на динамический */
     padding: 0 5vw;
     text-align: center;
 }
 
-/* Линии заголовка */
 .title-container::before,
 .title-container::after {
     content: '';
     position: absolute;
     top: 50%;
-    /* Используем vw (ширину экрана) для размера линий вместо фикс. px */
     width: 8vw;
-    max-width: 80px; /* Не больше 80px на больших экранах */
+    max-width: 80px;
     height: 4px;
     background-color: var(--primary-red);
     box-shadow: 0 0 15px var(--primary-red);
 }
 
-.title-container::before { left: -10vw; } /* Позиция относительно ширины */
+.title-container::before { left: -10vw; }
 .title-container::after { right: -10vw; }
 
 h1 {
-    /* CLAMP: Минимальный размер 2.5rem, идеальный 8vw, максимальный 6rem */
     font-size: clamp(2.5rem, 8vw, 6rem);
-    letter-spacing: clamp(2px, 1vw, 8px); /* Адаптивный трекинг */
+    letter-spacing: clamp(2px, 1vw, 8px);
     margin: 0;
     text-transform: uppercase;
     position: relative;
     color: white;
-    line-height: 1.1; /* Чтобы текст не наезжал друг на друга при переносе */
+    line-height: 1.1;
 }
 
 .accent {
@@ -111,7 +105,7 @@ h1 {
 }
 
 .subtitle {
-    margin-top: 5vh; /* Отступ зависит от высоты экрана */
+    margin-top: 5vh;
     font-size: clamp(0.8rem, 2vw, 1.2rem);
     letter-spacing: 3px;
     opacity: 0.8;
@@ -119,19 +113,16 @@ h1 {
     max-width: 90%;
 }
 
-/* --- HUD CORNERS (Адаптация) --- */
 .hud-corner {
     position: absolute;
-    /* Уменьшаем размер углов на мобильных */
     width: clamp(40px, 10vw, 80px);
     height: clamp(40px, 10vw, 80px);
     border: 4px solid transparent;
     opacity: 0.8;
     z-index: 102;
-    transition: all 0.3s ease; /* Плавное изменение при ресайзе */
+    transition: all 0.3s ease;
 }
 
-/* Используем переменные CSS для отступов, чтобы менять их в медиа-запросах */
 :root {
     --hud-offset: 40px;
 }
@@ -160,24 +151,21 @@ h1 {
     border-right: 4px solid var(--primary-red);
 }
 
-/* --- МЕДИА-ЗАПРОСЫ ДЛЯ МОБИЛЬНЫХ --- */
 @media (max-width: 768px) {
     :root {
-        --hud-offset: 15px; /* Уменьшаем отступ углов на телефонах */
+        --hud-offset: 15px;
     }
 
-    /* Скрываем линии по бокам на узких экранах, чтобы не мешали */
     .title-container::before,
     .title-container::after {
         display: none;
     }
 
     .title-container {
-        padding: 0; /* Убираем лишние отступы */
+        padding: 0;
     }
 
     h1 {
-        /* На очень узких экранах переносим слова, если надо */
         word-wrap: break-word;
     }
 }

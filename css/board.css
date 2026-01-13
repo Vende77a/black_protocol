@@ -2,7 +2,6 @@
     position: absolute;
     inset: 0;
     overflow: hidden;
-    /* Увеличиваем перспективу для мобильных, чтобы наклон был мягче */
     perspective: clamp(800px, 140vw, 1200px);
     background: #050505;
 }
@@ -10,14 +9,11 @@
 .table {
     position: absolute;
     left: 50%;
-    /* На мобильных стол должен быть чуть выше, на ПК — ниже */
     bottom: clamp(-40vh, -25vh, -15vh);
 
-    /* Адаптивная ширина: на ПК 170vw, на телефонах до 300vw, чтобы края не были видны */
     width: clamp(100vw, 170vw, 300vw);
     height: clamp(100vh, 180vh, 200vh);
 
-    /* Выносим переменные для трансформации, чтобы легче менять в медиа-запросах */
     --rotate-x: 55deg;
     --translate-y: -18%;
 
@@ -37,35 +33,62 @@
             inset 0 -120px 200px rgba(0,0,0,0.8);
 }
 
-/* Линии разметки стола */
 .table::before {
     content: "";
     position: absolute;
-    /* Отступ рамки адаптируем под размер экрана */
     inset: clamp(10px, 3vw, 30px);
-    border: 2px solid rgba(255,255,255,0.15);
+    border: 2px solid rgb(255, 255, 255);
     box-shadow:
-            inset 0 0 40px rgba(0,0,0,0.8),
-            0 0 40px rgba(0,0,0,0.8);
+            inset 0 0 40px rgb(255, 255, 255),
+            0 0 40px rgb(255, 255, 255);
     pointer-events: none;
 }
 
-/* МЕДИА-ЗАПРОС ДЛЯ МОБИЛЬНЫХ (ВЕРТИКАЛЬНЫХ) ЭКРАНОВ */
 @media (max-width: 768px) {
     .table {
-        /* На узких экранах увеличиваем ширину и меняем угол,
-           чтобы создать ощущение пространства */
         width: 350vw;
-        --rotate-x: 65deg; /* Более крутой наклон */
-        --translate-y: -10%; /* Поднимаем чуть выше */
+        --rotate-x: 65deg;
+        --translate-y: -10%;
         bottom: -35vh;
     }
 }
 
-/* Для очень маленьких экранов (iPhone SE и т.д.) */
 @media (max-width: 480px) {
     .table {
         width: 450vw;
         --rotate-x: 70deg;
     }
+}
+
+.audio-control {
+    position: fixed;
+    top: clamp(15px, 4vmin, 40px);
+    right: clamp(15px, 4vmin, 40px);
+    z-index: 1000;
+    background: transparent;
+    color: #8b0000;
+    border: 2px solid #650707;
+    border-radius: 50%;
+    width: clamp(50px, 10vmin, 80px);
+    height: clamp(50px, 10vmin, 80px);
+    cursor: pointer;
+    font-size: clamp(18px, 5vmin, 24px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.audio-control:hover {
+    background: rgba(139, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+    transform: scale(1.15);
+}
+
+.audio-control img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
