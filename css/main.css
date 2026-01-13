@@ -1,0 +1,150 @@
+:root {
+    --bg-color: #050505;
+    --primary-red: #ff003c;
+    --text-color: #ffffff;
+    --font-main: 'Orbitron', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Контейнер стартового экрана */
+.screen-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+    z-index: 100; /* Перекрывает игровой стол */
+    transition: opacity 1s ease;
+}
+
+/* --- ВАШ КОД ПОМЕХ --- */
+.noise-overlay {
+    position: absolute; /* Changed from fixed to absolute to stick to container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 101; /* Должен быть выше фона .screen-container (100) */
+
+    /* 1. Очень низкая прозрачность для мягкости */
+    opacity: 0.18; /* Чуть увеличил для видимости на черном, можете вернуть 0.04 */
+
+    /* 2. Комбинируем шум (SVG) и скан-линии (Gradient) */
+    background:
+        /* Тонкие полоски (сканлайн) */
+            linear-gradient(
+                    to bottom,
+                    rgba(255, 255, 255, 0),
+                    rgba(255, 255, 255, 0) 50%,
+                    rgba(0, 0, 0, 0.4) 50%,
+                    rgba(0, 0, 0, 0.4)
+            ),
+                /* Шум (зерно) */
+            url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+    background-size: 100% 4px, 200px 200px; /* Размер полосок и размер зерна */
+}
+
+/* Остальной CSS (Заголовки и HUD) */
+.content-wrapper {
+    z-index: 102; /* Текст должен быть поверх шума, чтобы читался четко */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 60px;
+}
+
+.title-container::before,
+.title-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-red);
+    box-shadow: 0 0 15px var(--primary-red);
+}
+
+.title-container::before { left: -50px; }
+.title-container::after { right: -50px; }
+
+h1 {
+    font-size: 6rem;
+    letter-spacing: 8px;
+    margin: 0;
+    text-transform: uppercase;
+    position: relative;
+    color: white;
+}
+
+.accent {
+    color: var(--primary-red);
+}
+
+.subtitle {
+    margin-top: 40px;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    opacity: 0.8;
+    text-align: center;
+}
+
+/* HUD Corners */
+.hud-corner {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 4px solid transparent;
+    opacity: 0.8;
+    z-index: 102; /* Поверх шума */
+}
+
+.top-left {
+    top: 40px; left: 40px;
+    border-top: 4px solid var(--primary-red);
+    border-left: 4px solid var(--primary-red);
+}
+
+.top-right {
+    top: 40px; right: 40px;
+    border-top: 4px solid var(--primary-red);
+    border-right: 4px solid var(--primary-red);
+}
+
+.bottom-left {
+    bottom: 40px; left: 40px;
+    border-bottom: 4px solid var(--primary-red);
+    border-left: 4px solid var(--primary-red);
+}
+
+.bottom-right {
+    bottom: 40px; right: 40px;
+    border-bottom: 4px solid var(--primary-red);
+    border-right: 4px solid var(--primary-red);
+}

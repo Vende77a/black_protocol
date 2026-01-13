@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>BL4CK PROTOCOL</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BL4CK_PROTOCOL — мрачная карточная игра во вселенной ИИ.">
+
+    <link rel="icon" href="/assets/ui/favicon.png" sizes="32x32">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/board.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+<div id="start-screen" class="screen-container">
+
+    <div class="noise-overlay"></div>
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner top-right"></div>
+    <div class="hud-corner bottom-left"></div>
+    <div class="hud-corner bottom-right"></div>
+
+    <div class="content-wrapper">
+        <div class="title-container">
+            <h1 class="glitch-text" data-text="BLACK PROTOCOL">BLACK <span class="accent">PROTOCOL</span></h1>
+        </div>
+
+        <p class="subtitle blink">НАЖМИТЕ КЛАВИШУ ПРОБЕЛА ЧТОБЫ НАЧАТЬ</p>
+    </div>
+</div>
+
+<audio id="intro-audio" src="assets/sounds/intro.mp3" loop></audio>
+
+<div id="game-board" class="hidden">
+    <div id="game-table" class="table">
+
+    </div>
+</div>
+
+<script src="js/startScreen.js"></script>
+</body>
+
+</html>
