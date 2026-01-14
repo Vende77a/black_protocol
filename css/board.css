@@ -1,11 +1,7 @@
 #scene {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     overflow: visible;
-    -webkit-backface-visibility: hidden;
 }
 
 #game-board {
@@ -15,10 +11,7 @@
     height: 100%;
     overflow: visible;
     background: #050505;
-
-    -webkit-perspective: 1000px;
     perspective: 1000px;
-    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
 
@@ -26,27 +19,13 @@
     position: absolute;
     left: 50%;
     bottom: clamp(-40vh, -25vh, -15vh);
-
     width: clamp(100vw, 170vw, 300vw);
     height: clamp(100vh, 180vh, 200vh);
-
-    --rotate-x: 55deg;
-    --translate-y: -18%;
-
-    transform: translateX(-50%) rotateX(var(--rotate-x)) translateY(var(--translate-y));
+    transform: translateX(-50%) rotateX(55deg) translateY(-18%);
     transform-origin: bottom center;
-
-    background:
-            linear-gradient(180deg,
-            #111 0%,
-            #1c1c1c 25%,
-            #242424 50%,
-            #1a1a1a 75%,
-            #0f0f0f 100%);
-
-    box-shadow:
-            inset 0 80px 200px rgba(150, 144, 144, 0.61),
-            inset 0 -120px 200px rgba(72, 65, 65, 0.8);
+    background: linear-gradient(180deg, #111 0%, #1c1c1c 25%, #242424 50%, #1a1a1a 75%, #0f0f0f 100%);
+    box-shadow: inset 0 80px 200px rgba(150, 144, 144, 0.61),
+    inset 0 -120px 200px rgba(72, 65, 65, 0.8);
 }
 
 .table::before {
@@ -54,9 +33,8 @@
     position: absolute;
     inset: clamp(10px, 3vw, 30px);
     border: 2px solid rgb(197, 183, 183);
-    box-shadow:
-            inset 0 0 40px rgb(157, 144, 144),
-            0 0 40px rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 40px rgb(157, 144, 144),
+    0 0 40px rgba(255, 255, 255, 0.5);
     pointer-events: none;
 }
 
@@ -64,11 +42,9 @@
     #game-board {
         perspective: 1200px;
     }
-
     .table {
         width: 300vw;
-        --rotate-x: 62deg;
-        --translate-y: -15%;
+        transform: translateX(-50%) rotateX(62deg) translateY(-15%);
         bottom: -25svh;
         height: 250svh;
     }
@@ -76,28 +52,15 @@
 
 @media (max-width: 480px) {
     #game-board {
-        -webkit-perspective: 1200px;
         perspective: 1200px;
-        /* Убираем возможные конфликты слоев */
-        -webkit-transform-style: flat;
-        transform-style: preserve-3d;
     }
-
     .table {
-        width: 200vw; /* Немного уменьшим для теста */
+        width: 200vw;
         height: 150svh;
         left: 50%;
         bottom: 0;
-
-        /* Обязательно добавляем translateZ(0) для форсирования аппаратного ускорения */
-        -webkit-transform: translateX(-50%) rotateX(60deg) translateZ(0);
         transform: translateX(-50%) rotateX(60deg) translateZ(0);
-
-        /* Исправляем баг исчезновения */
-        -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
-
-        /* Сообщаем браузеру, что будем менять только трансформацию */
         will-change: transform;
     }
 }
@@ -107,19 +70,18 @@
     top: clamp(15px, 4vmin, 40px);
     right: clamp(15px, 4vmin, 40px);
     z-index: 1000;
+    width: clamp(50px, 10vmin, 80px);
+    height: clamp(50px, 10vmin, 80px);
     background: transparent;
     color: #8b0000;
     border: 2px solid #650707;
     border-radius: 50%;
-    width: clamp(50px, 10vmin, 80px);
-    height: clamp(50px, 10vmin, 80px);
     cursor: pointer;
     font-size: clamp(18px, 5vmin, 24px);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    -webkit-tap-highlight-color: transparent;
     outline: none;
 }
 
