@@ -59,11 +59,6 @@
 }
 
 @media (max-width: 480px) {
-    #game-board {
-        /* Увеличиваем перспективу, чтобы бока меньше "схлопывались" к центру */
-        perspective: 1500px;
-    }
-
     .table {
         width: 500%;
         --rotate-x: 60deg;
