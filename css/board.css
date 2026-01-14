@@ -60,15 +60,15 @@
 
 @media (max-width: 480px) {
     #game-board {
-        /* Увеличиваем перспективу. Чем больше число, тем меньше искажаются бока (трапеция становится менее острой) */
+        /* Увеличиваем перспективу, чтобы бока меньше "схлопывались" к центру */
         perspective: 1500px;
     }
 
     .table {
         width: 600vw;
-        --rotate-x: 58deg;
-        --translate-y: -20%;
-        bottom: -35svh;
+        --rotate-x: 60deg;
+        --translate-y: -15%;
+        bottom: -30svh;
         height: 250svh;
         transform: translateX(-50%) rotateX(var(--rotate-x)) translateY(var(--translate-y)) scale(1.1);
     }
