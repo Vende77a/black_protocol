@@ -1,3 +1,13 @@
+#scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Режем здесь */
+    z-index: 1;
+}
+
 #game-board {
     position: absolute;
     inset: 0;
@@ -65,22 +75,15 @@
 }
 
 @media (max-width: 480px) {
-    #game-board {
-        /* Уменьшаем перспективу (делаем эффект шире), но не слишком сильно */
-        -webkit-perspective: 800px;
-        perspective: 800px;
-    }
-
     .table {
-        width: 250vw;
-        height: 150svh;
+        width: 280vw;
+        height: 200svh;
         left: 50%;
-        bottom: -15svh;
-        --rotate-x: 60deg;
-        --translate-y: 0%;
-        transform: translateX(-50%) rotateX(var(--rotate-x)) translateZ(0);
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
+        bottom: -60svh;
+        --rotate-x: 65deg;
+        transform: translateX(-50%) rotateX(var(--rotate-x)) translateZ(-100px);
+        transform-origin: bottom center;
+        will-change: transform;
     }
 }
 
