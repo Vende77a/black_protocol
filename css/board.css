@@ -1,14 +1,14 @@
 #scene {
     position: fixed;
     inset: 0;
-    overflow: visible;
+    overflow: hidden;
 }
 
 #game-board {
     position: absolute;
     inset: 0;
 
-    overflow: visible;
+    overflow: hidden;
     perspective: clamp(800px, 140vw, 1200px);
     background: #050505;
 }
