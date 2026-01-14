@@ -1,7 +1,7 @@
 #scene {
     position: fixed;
     inset: 0;
-    overflow: visible;
+    overflow: hidden;
 }
 
 #game-board {
@@ -9,7 +9,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    overflow: visible;
+    overflow: hidden;
     background: #050505;
     perspective: 1000px;
     transform-style: preserve-3d;
