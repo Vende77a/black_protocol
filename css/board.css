@@ -1,7 +1,7 @@
 #scene {
     position: fixed;
     inset: 0;
-    overflow: hidden;
+    overflow: visible;
 }
 
 #game-board {
@@ -9,7 +9,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: visible;
     background: #050505;
     perspective: 1000px;
     transform-style: preserve-3d;
@@ -44,24 +44,20 @@
     }
     .table {
         width: 300vw;
-        transform: translateX(-50%) rotateX(62deg) translateY(-15%);
+        --rotate-x: 62deg;
+        --translate-y: -15%;
         bottom: -25svh;
         height: 250svh;
     }
 }
 
 @media (max-width: 480px) {
-    #game-board {
-        perspective: 1200px;
-    }
     .table {
-        width: 200vw;
-        height: 150svh;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%) rotateX(60deg) translateZ(0);
-        backface-visibility: hidden;
-        will-change: transform;
+        width: 500vw;
+        --rotate-x: 65deg;
+        --translate-y: -10%;
+        bottom: -30svh;
+        height: 300svh;
     }
 }
 
