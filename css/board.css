@@ -33,6 +33,11 @@
     box-shadow:
             inset 0 80px 200px rgba(150, 144, 144, 0.61),
             inset 0 -120px 200px rgba(72, 65, 65, 0.8);
+
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+    transform-style: preserve-3d;
 }
 
 .table::before {
@@ -64,11 +69,11 @@
 
 @media (max-width: 480px) {
     .table {
-        width: 500vw;
+        width: 200vw;
         --rotate-x: 65deg;
         --translate-y: -10%;
         bottom: -30svh;
-        height: 300svh;
+        height: 150svh;
     }
 }
 
