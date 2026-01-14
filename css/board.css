@@ -4,6 +4,8 @@
     overflow: visible;
     perspective: clamp(800px, 140vw, 1200px);
     background: #050505;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
 }
 
 .table {
@@ -59,13 +61,20 @@
 }
 
 @media (max-width: 480px) {
+    #game-board {
+        perspective: 600px;
+        -webkit-perspective: 600px;
+    }
+
     .table {
-        width: 500%;
-        --rotate-x: 60deg;
-        --translate-y: -15%;
-        bottom: -30svh;
-        height: 250svh;
-        transform: translateX(-50%) rotateX(var(--rotate-x)) translateY(var(--translate-y)) scale(1.1);
+        width: 220vw;
+        --rotate-x: 58deg;
+        --translate-y: -10%;
+        bottom: -20svh;
+        height: 200svh;
+
+        transform: translateX(-50%) rotateX(var(--rotate-x)) translateY(var(--translate-y));
+        will-change: transform;
     }
 }
 
