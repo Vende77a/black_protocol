@@ -1,7 +1,7 @@
 #game-board {
     position: absolute;
     inset: 0;
-    overflow: hidden;
+    overflow: visible;
     perspective: clamp(800px, 140vw, 1200px);
     background: #050505;
 }
@@ -65,7 +65,7 @@
     }
 
     .table {
-        width: 600vw;
+        width: 500%;
         --rotate-x: 60deg;
         --translate-y: -15%;
         bottom: -30svh;
