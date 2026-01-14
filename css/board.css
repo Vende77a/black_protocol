@@ -4,8 +4,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Режем здесь */
-    z-index: 1;
+    overflow: visible;
+    -webkit-backface-visibility: hidden;
 }
 
 #game-board {
@@ -76,29 +76,28 @@
 
 @media (max-width: 480px) {
     #game-board {
-        /* Увеличиваем перспективу, чтобы объект был "стабильнее" */
         -webkit-perspective: 1200px;
         perspective: 1200px;
-        /* Важно для предотвращения мерцания */
-        -webkit-backface-visibility: hidden;
+        /* Убираем возможные конфликты слоев */
+        -webkit-transform-style: flat;
+        transform-style: preserve-3d;
     }
 
     .table {
-        width: 250vw;
-        height: 180svh;
+        width: 200vw; /* Немного уменьшим для теста */
+        height: 150svh;
         left: 50%;
-        /* Поднимаем выше, чтобы он не пропадал внизу */
-        bottom: -10svh;
+        bottom: 0;
 
-        /* Пишем трансформацию одной строкой без переменных для теста */
-        -webkit-transform: translateX(-50%) rotateX(60deg);
-        transform: translateX(-50%) rotateX(60deg);
+        /* Обязательно добавляем translateZ(0) для форсирования аппаратного ускорения */
+        -webkit-transform: translateX(-50%) rotateX(60deg) translateZ(0);
+        transform: translateX(-50%) rotateX(60deg) translateZ(0);
 
-        /* Force GPU rendering */
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
+        /* Исправляем баг исчезновения */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
 
-        /* Заставляем слой остаться в памяти */
+        /* Сообщаем браузеру, что будем менять только трансформацию */
         will-change: transform;
     }
 }
