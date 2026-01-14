@@ -76,19 +76,29 @@
 
 @media (max-width: 480px) {
     #game-board {
-        perspective: 700px;
-        -webkit-perspective: 700px;
+        /* Увеличиваем перспективу, чтобы объект был "стабильнее" */
+        -webkit-perspective: 1200px;
+        perspective: 1200px;
+        /* Важно для предотвращения мерцания */
+        -webkit-backface-visibility: hidden;
     }
 
     .table {
         width: 250vw;
-        height: 150svh;
+        height: 180svh;
         left: 50%;
-        bottom: -15svh;
-        --rotate-x: 62deg;
-        transform: translateX(-50%) rotateX(var(--rotate-x));
-        -webkit-transform: translateX(-50%) rotateX(var(--rotate-x));
-        transform-origin: bottom center;
+        /* Поднимаем выше, чтобы он не пропадал внизу */
+        bottom: -10svh;
+
+        /* Пишем трансформацию одной строкой без переменных для теста */
+        -webkit-transform: translateX(-50%) rotateX(60deg);
+        transform: translateX(-50%) rotateX(60deg);
+
+        /* Force GPU rendering */
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+
+        /* Заставляем слой остаться в памяти */
         will-change: transform;
     }
 }
