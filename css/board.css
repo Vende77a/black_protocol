@@ -75,13 +75,19 @@
 }
 
 @media (max-width: 480px) {
+    #game-board {
+        perspective: 700px;
+        -webkit-perspective: 700px;
+    }
+
     .table {
-        width: 280vw;
-        height: 200svh;
+        width: 250vw;
+        height: 150svh;
         left: 50%;
-        bottom: -60svh;
-        --rotate-x: 65deg;
-        transform: translateX(-50%) rotateX(var(--rotate-x)) translateZ(-100px);
+        bottom: -15svh;
+        --rotate-x: 62deg;
+        transform: translateX(-50%) rotateX(var(--rotate-x));
+        -webkit-transform: translateX(-50%) rotateX(var(--rotate-x));
         transform-origin: bottom center;
         will-change: transform;
     }
