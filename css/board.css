@@ -1,11 +1,15 @@
 #game-board {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
     overflow: visible;
-    perspective: clamp(800px, 140vw, 1200px);
     background: #050505;
-    transform-style: preserve-3d;
+
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
     -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 
 .table {
@@ -62,19 +66,21 @@
 
 @media (max-width: 480px) {
     #game-board {
-        perspective: 600px;
-        -webkit-perspective: 600px;
+        /* Уменьшаем перспективу (делаем эффект шире), но не слишком сильно */
+        -webkit-perspective: 800px;
+        perspective: 800px;
     }
 
     .table {
-        width: 220vw;
-        --rotate-x: 58deg;
-        --translate-y: -10%;
-        bottom: -20svh;
-        height: 200svh;
-
-        transform: translateX(-50%) rotateX(var(--rotate-x)) translateY(var(--translate-y));
-        will-change: transform;
+        width: 250vw;
+        height: 150svh;
+        left: 50%;
+        bottom: -15svh;
+        --rotate-x: 60deg;
+        --translate-y: 0%;
+        transform: translateX(-50%) rotateX(var(--rotate-x)) translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
 }
 
