@@ -11,6 +11,8 @@
     overflow: hidden;
     perspective: clamp(800px, 140vw, 1200px);
     background: #050505;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .table {
