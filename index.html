@@ -36,15 +36,20 @@
 
 <audio id="intro-audio" src="assets/sounds/soundtrack.mp3" loop></audio>
 
-<div id="scene" class="hidden">
-    <button id="audio-toggle" class="audio-control">
-        <img id="audio-icon" src="assets/ui/music_on.png" alt="Sound On">
-    </button
+<div id="game">
+    <div id="viewport">
+        <div id="scene">
+            <button id="audio-toggle" class="audio-control" type="button">
+                <img id="audio-icon" src="assets/ui/music_on.png" alt="Sound On">
+            </button>
 
-    ><div id="game-board">
-        <div id="game-table" class="table"></div>
+            <div id="game-board" class="hidden">
+                <div id="game-table" class="table"></div>
+            </div>
+        </div>
     </div>
 </div>
+
 
 <script src="js/startScreen.js"></script>
 </body>

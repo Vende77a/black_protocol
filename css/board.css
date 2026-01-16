@@ -1,5 +1,36 @@
-#scene {
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#game {
     position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: #050505;
+}
+
+#viewport {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: min(100vw, calc(100vh * 16 / 9));
+    height: min(100vh, calc(100vw * 9 / 16));
+    aspect-ratio: 16 / 9;
+
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+
+    overflow: hidden;
+}
+
+#scene {
+    position: absolute;
     inset: 0;
     overflow: hidden;
 }
@@ -9,21 +40,34 @@
     inset: 0;
 
     overflow: hidden;
-    perspective: clamp(800px, 140vw, 1200px);
+    perspective: 1200px;
     background: #050505;
+
     opacity: 0;
     pointer-events: none;
+}
+
+#game-board.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .table {
     position: absolute;
     left: 50%;
-    bottom: clamp(-40vh, -25vh, -15vh);
-    width: clamp(100vw, 170vw, 300vw);
-    height: clamp(100vh, 180vh, 200vh);
+    bottom: -35%;
+
+    width: 180%;
+    height: 160%;
+
     --rotate-x: 55deg;
     --translate-y: -18%;
-    transform: translateX(-50%) rotateX(var(--rotate-x)) translateY(var(--translate-y));
+
+    transform:
+            translateX(-50%)
+            rotateX(var(--rotate-x))
+            translateY(var(--translate-y));
+
     transform-origin: bottom center;
     background:
             linear-gradient(180deg,
@@ -53,33 +97,13 @@
     pointer-events: none;
 }
 
-
-
 @media (max-width: 768px) {
-    #game-board {
-        perspective: 1200px;
-    }
-
     .table {
-        width: 300vw;
         --rotate-x: 62deg;
-        --translate-y: -15%;
-        bottom: -25svh;
-        height: 250svh;
+        --translate-y: -14%;
+        bottom: -30%;
     }
 }
-
-@media (max-width: 480px) {
-    .table {
-        width: 200vw;
-        --rotate-x: 65deg;
-        --translate-y: -10%;
-        bottom: -30svh;
-        height: 150svh;
-    }
-}
-
-
 
 .audio-control {
     position: fixed;
