@@ -55,10 +55,11 @@ body {
 .table {
     position: absolute;
     left: 50%;
-    bottom: -35%;
+    bottom: -40%;
 
-    width: 180%;
-    height: 160%;
+    width: 220%;
+    height: 240%;
+
 
     --rotate-x: 55deg;
     --translate-y: -18%;
@@ -137,4 +138,46 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+#board-layer{
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: auto auto;
+    row-gap: clamp(18px, 3vmin, 40px);
+    justify-content: center;
+    align-content: center;
+    padding: clamp(10px, 2vmin, 24px) clamp(16px, 4vmin, 56px);
+
+    pointer-events: none;
+}
+
+.enemy-zone,
+.player-zone{
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    justify-content: center;
+    column-gap: 30px;
+    align-content: center;
+    pointer-events: auto;
+}
+
+.card-slot{
+    width: clamp(220px, 52vmin, 440px);
+    aspect-ratio: 3 / 4;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.18);
+    border: 6px solid rgba(255,255,255,0.18);
+    box-shadow:
+            inset 0 0 18px rgba(255,255,255,0.06),
+            0 10px 25px rgba(0,0,0,0.35);
+}
+
+.enemy-zone .card-slot{
+    border-color: rgba(255,0,60,0.45);
+}
+
+.player-zone .card-slot{
+    border-color: rgba(0,255,255,0.30);
 }
