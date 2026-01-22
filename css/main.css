@@ -121,3 +121,11 @@ h1 {
     .title-container { padding: 0; }
     h1 { word-wrap: break-word; }
 }
+
+#version {
+    position: absolute;
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
+    opacity: 0.3;
+    bottom: var(--hud-offset);
+    left: var(--hud-offset);
+}
